@@ -10,7 +10,7 @@ public class Solver {
     private List<String> words;
     private List<String> temp = new ArrayList<String>();
 
-    private List<ArrayList<String>> resutlt = new ArrayList<ArrayList<String>>();
+    private List<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
     private List<ArrayList<String>> finalPuzzle = new ArrayList<ArrayList<String>>();
 
 
@@ -52,8 +52,8 @@ public class Solver {
                             temp.add(string);
                             temp.add(Integer.toString(string.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("DownRight");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.DownRight.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }else if (i + string.length() <= puzzle.size() && j - string.length() >= 0){
                         for(int k = 0; k < string.length(); k++){
@@ -69,8 +69,8 @@ public class Solver {
                             temp.add(string);
                             temp.add(Integer.toString(string.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("DownLeft");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.DownLeft.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }else if (i - string.length() >= 0 && j + string.length() <= puzzle.get(i).size()){
                         for(int k = 0; k < string.length(); k++){
@@ -86,8 +86,8 @@ public class Solver {
                             temp.add(string);
                             temp.add(Integer.toString(string.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("UpRight");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.UpRight.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }else if (i - string.length() >= 0 && j - string.length() >= 0){
                         for(int k = 0; k < string.length(); k++){
@@ -103,8 +103,8 @@ public class Solver {
                             temp.add(string);
                             temp.add(Integer.toString(string.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("UpLeft");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.UpLeft.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }
                  
@@ -135,8 +135,8 @@ public class Solver {
                             temp.add(string);
                             temp.add(Integer.toString(string.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("Down");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.Down.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }else if (i - string.length() >= 0){
                         for(int k = 0; k < string.length(); k++){
@@ -152,8 +152,8 @@ public class Solver {
                             temp.add(string);
                             temp.add(Integer.toString(string.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("Up");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.Up.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }
                 }
@@ -183,8 +183,8 @@ public class Solver {
                             temp.add(word);
                             temp.add(Integer.toString(word.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("Right");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.Right.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }else if(j - word.length() >= 0){
                         for(int k = 0; k < word.length(); k++){
@@ -200,8 +200,8 @@ public class Solver {
                             temp.add(word);
                             temp.add(Integer.toString(word.length()));
                             temp.add(Integer.toString(i+1) + "," + Integer.toString(j+1));
-                            temp.add("Left");
-                            resutlt.add((ArrayList<String>) temp);
+                            temp.add(Positions.Left.toString()); // usar o enumerate
+                            result.add((ArrayList<String>) temp);
                         }
                     }
                 }
@@ -214,14 +214,14 @@ public class Solver {
     public void makeFinalPuzzle()
     {
         int size = puzzle.size();
-        for (int i = 0; i<resutlt.size(); i++){
-            if(resutlt.get(i).get(resutlt.size()-1) == "Up"){
+        for (int i = 0; i<result.size(); i++){
+            if(result.get(i).get(result.size()-1) == "Up"){ // seria preciso trocar a string "Up" com as positions
                 ArrayList<Integer> cords = new ArrayList<>();
-                for (String s : resutlt.get(i).get(2).split(",")) {
+                for (String s : result.get(i).get(2).split(",")) {
                     cords.add(Integer.parseInt(s));
                 }
-                for(int x = 0; x < resutlt.get(i).get(0).length();x++){
-                    finalPuzzle.get(cords.get(0)).set(cords.get(1),resutlt.get(i).get(0));
+                for(int x = 0; x < result.get(i).get(0).length();x++){
+                    finalPuzzle.get(cords.get(0)).set(cords.get(1),result.get(i).get(0));
                 }
             }
         }
@@ -229,15 +229,15 @@ public class Solver {
     }
 
     public List<ArrayList<String>> getResult() {
-        return resutlt;
+        return result;
     }
 
     public void toStringResult(){
         System.out.printf("%-13s %-13s %-13s %-13s %n", "Word", "Length", "Start", "Direction");
         System.out.printf("-----------------------------------------------------------%n");
-        for(int i = 0; i < resutlt.size(); i++){
-            for(int j = 0; j < resutlt.get(i).size(); j++){
-                System.out.printf("%-13s ", resutlt.get(i).get(j));
+        for(int i = 0; i < result.size(); i++){
+            for(int j = 0; j < result.get(i).size(); j++){
+                System.out.printf("%-13s ", result.get(i).get(j));
             }
             System.out.println("");
         }

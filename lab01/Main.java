@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-//import javax.swing.UIDefaults.ProxyLazyValue;
-
 public class Main {
   public static void main(String[] args) {
     String file = args[0];
@@ -20,6 +17,9 @@ public class Main {
 
     Validation validation = new Validation(puzzle, words);
     validation.MaximumSize(puzzle); // Requisito de entrada 1
+    validation.PuzzleInUpperCase(puzzle); // Requisito de entrada 2
+    validation.WordsinLowerCaseOrBoth(words); // Requisito de entrada 3
+    validation.WordsAlphaChars(words); // Requisito de entrada 4
     validation.AtLeast3Characters(words);  // Requisito de entrada 7
 
     
@@ -32,20 +32,21 @@ public class Main {
     }
     System.out.println();
 
-    // print das palavras
+    // print das palavras contidas no .txt
     for (int i = 0; i < words.size(); i++) {
       System.out.println(words.get(i));
     }
     System.out.println();
 
     Solver solver = new Solver(puzzle, words);
-    solver.solve();
+    solver.solve(); // imprime a tabela
 
     //print do resultado
     solver.toStringResult();
 
-    
-    
+    //Print da sopa de letras apenas com as palavras encontradas
+    System.out.println();
+    //solver.makeFinalPuzzle(); // index out of bounds
     
 
     
@@ -70,6 +71,11 @@ public class Main {
 
       for (int count = 1; count < linha1.length(); count++) {
         linha = lerArq.readLine(); // lê da segunda até a última linha
+        if(linha.isEmpty()){ // Requisito de entrada 5
+          System.out.println("Existem linhas vazias no ficheiro.");
+          System.exit(0); // sai do programa
+        }
+
         subPuzzle = new ArrayList<String>();
         for (int i = 0; i < linha.length(); i++) {
           subPuzzle.add(linha.substring(i, i + 1));
@@ -78,6 +84,10 @@ public class Main {
       }
 
       while ((linha = lerArq.readLine()) != null) {
+        if(linha.isEmpty()){ // Requisito de entrada 5
+          System.out.println("Existem linhas vazias no ficheiro.");
+          System.exit(0); // sai do programa
+        }
         for (String s : linha.split("[; ]")) {
             words.add(s);
         }
