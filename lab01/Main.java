@@ -18,6 +18,11 @@ public class Main {
     List<ArrayList<String>> puzzle = data.subList(0, data.size() - 1);
     List<String> words = data.get(data.size() - 1);
 
+    Validation validation = new Validation(puzzle, words);
+    validation.MaximumSize(puzzle); // Requisito de entrada 1
+    validation.AtLeast3Characters(words);  // Requisito de entrada 7
+
+    
     // print do puzzle
     for (int i = 0; i < puzzle.size(); i++) {
       for (int j = 0; j < puzzle.get(i).size(); j++) {
@@ -25,16 +30,23 @@ public class Main {
       }
       System.out.println();
     }
+    System.out.println();
 
     // print das palavras
     for (int i = 0; i < words.size(); i++) {
       System.out.println(words.get(i));
     }
+    System.out.println();
 
     Solver solver = new Solver(puzzle, words);
-    solver.MaximumSize(puzzle); // Requisito de entrada 1
-    solver.AtLeast3Characters(words);  // Requisito de entrada 7
     solver.solve();
+
+    //print do resultado
+    solver.toStringResult();
+
+    
+    
+    
 
     
   }
