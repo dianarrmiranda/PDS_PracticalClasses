@@ -32,6 +32,8 @@ public class Main {
     }
 
     Solver solver = new Solver(puzzle, words);
+    solver.MaximumSize(puzzle); // Requisito de entrada 1
+    solver.AtLeast3Characters(words);  // Requisito de entrada 7
     solver.solve();
 
     
