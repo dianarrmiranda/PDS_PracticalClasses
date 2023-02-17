@@ -79,11 +79,15 @@ public class Validation {
         for (int i = 0; i < words.size(); i++) {
           boolean hasBigger = false;
           for (int j = 0; j < words.size(); j++) {
-            if (i != j && words.get(j).startsWith(words.get(i))) {
+            if (i != j && words.get(j).contains(words.get(i))) {
+                if(words.get(i).equals(words.get(j))){
+                    System.out.println("Existem palavras repetidas na lista.");
+                    System.exit(0);
+                }
               hasBigger = true;
               break;
             }
-          }
+        }
           if (!hasBigger) {// Como não há maior palavra com o mesmo prefixo, adiciona-se a palavra à lista
             result.add(words.get(i));
           }
