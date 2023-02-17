@@ -1,5 +1,5 @@
 package lab01;
 
-public enum Positions {
+public enum Direction {
     Up, Down, Left, Right, UpLeft, UpRight, DownLeft, DownRight
 }

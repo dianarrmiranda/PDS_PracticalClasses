@@ -22,31 +22,31 @@ public class Main {
     validation.WordsAlphaChars(words); // Requisito de entrada 4
     validation.AtLeast3Characters(words);  // Requisito de entrada 7
     words= validation.BiggerWordWithSamePrefix(words); // Requisito de entrada 9
-    
-    // print do puzzle
-    for (int i = 0; i < puzzle.size(); i++) {
-      for (int j = 0; j < puzzle.get(i).size(); j++) {
-        System.out.print(puzzle.get(i).get(j));
-      }
-      System.out.println();
-    }
-    System.out.println();
-
-    // print das palavras contidas no .txt
-    for (int i = 0; i < words.size(); i++) {
-      System.out.println(words.get(i));
-    }
-    System.out.println();
 
     Solver solver = new Solver(puzzle, words);
     solver.solve(); // imprime a tabela
 
-    //print do resultado
-    solver.toStringResult();
+    // print do puzzle
+    String printPuzzle = solver.toStringPuzzle();
+    System.out.println(printPuzzle);
 
-    //Print da sopa de letras apenas com as palavras encontradas
+    // print das palavras contidas no .txt
+    String printWords = solver.toStringWords();
+    System.out.println(printWords);
+
     System.out.println();
-    //solver.makeFinalPuzzle(); // index out of bounds
+    
+    //print da informação de todas as palavras
+    String printWordsResults = solver.toStringResults();
+    System.out.println(printWordsResults);
+
+    System.out.println();
+
+    //print do puzzle final
+    solver.makefinalPuzzle();
+    String printFinalPuzzle= solver.toStringFinalPuzzle();
+    System.out.println(printFinalPuzzle);
+
     
 
     
