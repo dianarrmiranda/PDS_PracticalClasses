@@ -21,7 +21,7 @@ public class Main {
     validation.WordsinLowerCaseOrBoth(words); // Requisito de entrada 3
     validation.WordsAlphaChars(words); // Requisito de entrada 4
     validation.AtLeast3Characters(words);  // Requisito de entrada 7
-
+    words= validation.BiggerWordWithSamePrefix(words); // Requisito de entrada 9
     
     // print do puzzle
     for (int i = 0; i < puzzle.size(); i++) {
@@ -88,7 +88,7 @@ public class Main {
           System.out.println("Existem linhas vazias no ficheiro.");
           System.exit(0); // sai do programa
         }
-        for (String s : linha.split("[; ]")) {
+        for (String s : linha.split("[;, ]")) { // Requisito de entrada 6
             words.add(s);
         }
     }

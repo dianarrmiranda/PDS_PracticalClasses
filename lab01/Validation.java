@@ -72,4 +72,23 @@ public class Validation {
         }
     }
     
+    public List<String> BiggerWordWithSamePrefix(List<String> words) {// Requisito de entrada 9
+        // Esta função é passível de ser otimizada se a lista for ordenada, pois diminui o nº de comparações
+        List<String> result = new ArrayList<String>();
+      
+        for (int i = 0; i < words.size(); i++) {
+          boolean hasBigger = false;
+          for (int j = 0; j < words.size(); j++) {
+            if (i != j && words.get(j).startsWith(words.get(i))) {
+              hasBigger = true;
+              break;
+            }
+          }
+          if (!hasBigger) {// Como não há maior palavra com o mesmo prefixo, adiciona-se a palavra à lista
+            result.add(words.get(i));
+          }
+        }
+        return result;
+      }
+      
 }
