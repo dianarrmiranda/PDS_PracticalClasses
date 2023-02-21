@@ -4,29 +4,40 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.File;
 
 public class WSGenerator {
-    public static void main(String[] args) {
-        String file = null;
+    public static FileWriter WriteinFile;
+    public static void main(String[] args) throws IOException{
+        String Inputfile = null, OutputFile = null;
         int Soup_Size = 0;
         
         for(int i = 0; i < args.length; i++){
             switch (args[i]) {
                 case "-i":
-                    file = args[i + 1]; // o nome do ficheiro vem a seguir ao parametro -i
+                    Inputfile = args[i + 1]; // o nome do ficheiro vem a seguir ao parametro -i
                     continue;
                 case "-s":
                     Soup_Size = Integer.parseInt(args[i + 1]);
                     continue;
+                case "-o": //read the output file
+                    OutputFile = args[i+1];
+                    break;
             }
         }
+
+        // Criar o ficheiro de output com o nome passado como parametro
+        File file  = new File(OutputFile); 
+        file.createNewFile();
+        WriteinFile = new FileWriter(file);
     
         if(Soup_Size > 40){ // Verificar o tamanho maximo que o puzzle pode ter
             System.out.println("O tamanho máximo do puzzle é 40.");
             System.exit(0);
         }
         
-        List<String> words = ReadWordsFromFile(file);
+        List<String> words = ReadWordsFromFile(Inputfile);
 
         Validation validation = new Validation(words);
         validation.WordsinLowerCaseOrBoth(words); // Requisito de entrada 3
@@ -43,10 +54,7 @@ public class WSGenerator {
     }
 
     public static List<String> ReadWordsFromFile(String file) {
-        // List<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-        String linha = "";
-        // List<ArrayList<String>> puzzle = new ArrayList<ArrayList<String>>();
-        // List<String> subPuzzle = new ArrayList<String>();
+        String linha = ""; 
         List<String> words = new ArrayList<String>();
         
         try {
