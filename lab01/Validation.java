@@ -13,6 +13,10 @@ public class Validation {
         this.words = words;
     }
 
+    public Validation(List<String> words) { // Construtor para usar na parte do generator
+        this.words = words;
+    }
+
     public void MaximumSize(List<ArrayList<String>> puzzle){ // Requisito de entrada 1
         int Ncols= 0;
         if(puzzle.size() > 40){
