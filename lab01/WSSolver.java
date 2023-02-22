@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class WSSolver {
   public static void main(String[] args) {
     String file = args[0];
     
@@ -24,31 +24,26 @@ public class Main {
     words= validation.BiggerWordWithSamePrefix(words); // Requisito de entrada 9
 
     Solver solver = new Solver(puzzle, words);
-    solver.solve(); // imprime a tabela
+    solver.solve(); 
 
     // print do puzzle
-    String printPuzzle = solver.toStringPuzzle();
-    System.out.println(printPuzzle);
+    //String printPuzzle = solver.toStringPuzzle();
+    //System.out.println(printPuzzle);
 
     // print das palavras contidas no .txt
-    String printWords = solver.toStringWords();
-    System.out.println(printWords);
+    //String printWords = solver.toStringWords();
+    //System.out.println(printWords);
 
-    System.out.println();
+    //System.out.println();
     
     //print da informação de todas as palavras
     String printWordsResults = solver.toStringResults();
     System.out.println(printWordsResults);
 
-    System.out.println();
-
     //print do puzzle final
     solver.makefinalPuzzle();
     String printFinalPuzzle= solver.toStringFinalPuzzle();
     System.out.println(printFinalPuzzle);
-
-    
-
     
   }
 

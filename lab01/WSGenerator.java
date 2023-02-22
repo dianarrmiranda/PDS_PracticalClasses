@@ -23,7 +23,7 @@ public class WSGenerator {
                     continue;
                 case "-o": //read the output file
                     OutputFile = args[i+1];
-                    break;
+                    continue;
             }
         }
 
@@ -43,14 +43,35 @@ public class WSGenerator {
         validation.WordsinLowerCaseOrBoth(words); // Requisito de entrada 3
         validation.WordsAlphaChars(words); // Requisito de entrada 4
         validation.AtLeast3Characters(words);  // Requisito de entrada 7
-        words= validation.BiggerWordWithSamePrefix(words); // Requisito de entrada 9
-        
-        String output = "";
+        words = validation.BiggerWordWithSamePrefix(words); // Requisito de entrada 9
 
-        for (int i = 0; i < words.size(); i++) {
-            output += words.get(i) + " ";
+        
+        CreatePuzzle createPuzzle = new CreatePuzzle(words, Soup_Size);
+        List<ArrayList<String>> puzzle = createPuzzle.puzzle();
+
+        /*  
+        //print words
+        for (String s : words) {
+            WriteinFile.write(s + ";");
+            System.out.println(s + ";");
         }
-        System.out.println(output);
+
+        */
+
+        Solver solver = new Solver(puzzle, words);
+        solver.solve(); 
+    
+        //print da informação de todas as palavras
+        String printWordsResults = solver.toStringResults();
+        System.out.println(printWordsResults);
+    
+        //print do puzzle final
+        solver.makefinalPuzzle();
+        String printFinalPuzzle= solver.toStringFinalPuzzle();
+        System.out.println(printFinalPuzzle);
+
+        
+        
     }
 
     public static List<String> ReadWordsFromFile(String file) {
@@ -79,4 +100,5 @@ public class WSGenerator {
         
         return words;
     }
+    
 }
