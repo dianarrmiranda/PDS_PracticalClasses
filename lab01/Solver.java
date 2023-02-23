@@ -246,7 +246,7 @@ public class Solver {
     }
 
     public String toStringResults(){
-        String output = String.format("%-14s %-7s %-9s %-10s\n", "Word", "Length", "Cords", "Direction");
+        String output = String.format("%-14s %-7s %-7s %-10s\n", "Word", "Length", "Cords", "Direction");
         
         for(int i = 0; i < wordsResults.size(); i++){
             output += wordsResults.get(i).toString() + "\n";

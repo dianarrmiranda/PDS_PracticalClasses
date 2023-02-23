@@ -184,17 +184,8 @@ public class CreatePuzzle {
                 }
             }
         }
-
-        /* 
-        // imprimir o puzzle
-        for (int i = 0; i < puzzle.size(); i++) {
-            for (int j = 0; j < puzzle.get(i).size(); j++) {
-                System.out.print(puzzle.get(i).get(j) + " ");
-            }
-            System.out.println();
-        }
-        */
         
         return puzzle;
     }
+
 }
