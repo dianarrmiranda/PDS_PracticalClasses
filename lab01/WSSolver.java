@@ -25,16 +25,6 @@ public class WSSolver {
 
     Solver solver = new Solver(puzzle, words);
     solver.solve(); 
-
-    // print do puzzle
-    //String printPuzzle = solver.toStringPuzzle();
-    //System.out.println(printPuzzle);
-
-    // print das palavras contidas no .txt
-    //String printWords = solver.toStringWords();
-    //System.out.println(printWords);
-
-    //System.out.println();
     
     //print da informação de todas as palavras
     String printWordsResults = solver.toStringResults();

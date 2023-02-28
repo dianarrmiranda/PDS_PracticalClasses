@@ -1,4 +1,4 @@
-package lab01;
+package lab02.T1;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

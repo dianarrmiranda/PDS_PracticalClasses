@@ -1,4 +1,4 @@
-package lab01;
+package lab02.T2;
 
 import java.util.*;
 import java.io.File;  // Import the File class

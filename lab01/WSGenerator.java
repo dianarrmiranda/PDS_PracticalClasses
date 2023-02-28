@@ -113,11 +113,4 @@ public class WSGenerator {
         return words;
     }
 
-    // public static String toStringFinalWords(List<String> Listwords) {
-    //     String words = "";
-    //     for (String word : Listwords) {
-    //         words += word + "";
-    //     }
-    //     return words;
-    // }
 }

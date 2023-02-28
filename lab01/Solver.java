@@ -230,7 +230,7 @@ public class Solver {
         String output = "";
         for(int i = 0; i < puzzle.size(); i++){
             for(int j = 0; j < puzzle.get(i).size(); j++){
-                output += puzzle.get(i).get(j) + " ";
+                output += puzzle.get(i).get(j) + "";
             }
             output += "\n";
         }

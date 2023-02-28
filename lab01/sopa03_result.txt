@@ -1,0 +1,21 @@
+Word           Length  Cords   Direction 
+Portugal       8       12,8       Up        
+LISboa         6       12,12      Up        
+Aveiras        7       4,8       Left      
+Caldo          5       12,2       Up        
+Bacalhau       8       3,9       Left      
+Chouriça       8       12,7       Up        
+
+. . . . . . . . . . . . 
+. . . . . . . . . . . . 
+. U A H L A C A B . . . 
+. S A R I E V A . . . . 
+. . . . . . A L . . . . 
+. . . . . . Ç A . . . . 
+. . . . . . I G . . . A 
+. O . . . . R U . . . O 
+. D . . . . U T . . . B 
+. L . . . . O R . . . S 
+. A . . . . H O . . . I 
+. C . . . . C P . . . L 
+
