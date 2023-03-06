@@ -41,7 +41,7 @@ public class RequisitosEntrada {
     }
 
     if(count == linesize){
-        char [][] soup = new char [count][linesize]; // onde vamos guardar o puzzle
+        //char [][] soup = new char [count][linesize]; // onde vamos guardar o puzzle
     }
   }
 }
