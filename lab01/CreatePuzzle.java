@@ -31,23 +31,23 @@ public class CreatePuzzle {
         }
     }
 
-    public int validation(Direction dir, int x, int y, int wordSize) {
+    public int validation(Direction dir, int x, int y, int wordSize, String word) {
 
         if (dir == Direction.Up) {
             if (y - wordSize >= 0) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y - i).get(x) != ".") {
+                    if (!puzzle.get(y - i).get(x).equals(".") && !puzzle.get(y - i).get(x).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
-            }else{
+            } else {
                 return 0;
             }
 
         } else if (dir == Direction.Down) {
             if (y + wordSize < size) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y + i).get(x) != ".") {
+                    if (!puzzle.get(y + i).get(x).equals(".") && !puzzle.get(y + i).get(x).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
@@ -57,7 +57,7 @@ public class CreatePuzzle {
         } else if (dir == Direction.Left) {
             if (x - wordSize >= 0) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y).get(x - i) != ".") {
+                    if (!puzzle.get(y).get(x - 1).equals(".")  && !puzzle.get(y).get(x - i).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
@@ -67,7 +67,7 @@ public class CreatePuzzle {
         } else if (dir == Direction.Right) {
             if (x + wordSize < size) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y).get(x + i) != ".") {
+                    if (!puzzle.get(y).get(x + i).equals(".") && !puzzle.get(y).get(x + i).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
@@ -77,7 +77,7 @@ public class CreatePuzzle {
         } else if (dir == Direction.UpLeft) {
             if (x - wordSize >= 0 && y - wordSize >= 0) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y - i).get(x - i) != ".") {
+                    if (!puzzle.get(y - i).get(x - i).equals(".") && !puzzle.get(y - i).get(x - i).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
@@ -87,7 +87,7 @@ public class CreatePuzzle {
         } else if (dir == Direction.UpRight) {
             if (x + wordSize < size && y - wordSize >= 0) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y - i).get(x + i) != ".") {
+                    if (!puzzle.get(y - i).get(x + i).equals(".") && !puzzle.get(y - i).get(x + i).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
@@ -97,7 +97,7 @@ public class CreatePuzzle {
         } else if (dir == Direction.DownLeft) {
             if (x - wordSize >= 0 && y + wordSize < size) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y + i).get(x - i) != ".") {
+                    if (!puzzle.get(y + i).get(x-1).equals(".") && !puzzle.get(y + i).get(x - i).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
@@ -107,7 +107,7 @@ public class CreatePuzzle {
         } else if (dir == Direction.DownRight) {
             if (x + wordSize < size && y + wordSize < size) {
                 for (int i = 0; i < wordSize; i++) {
-                    if (puzzle.get(y + i).get(x + i) != ".") {
+                    if (!puzzle.get(y + i).get(x + i).equals(".") && !puzzle.get(y + i).get(x + i).equals(String.valueOf(word.charAt(i)).toUpperCase())) {
                         return 0;
                     }
                 }
@@ -130,9 +130,7 @@ public class CreatePuzzle {
             int y = (int) (Math.random() * size);
             Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
 
-        
-
-            while (validation(dir, x, y, wordSize) == 0) {
+            while (validation(dir, x, y, wordSize, word) == 0) {
                 x = (int) (Math.random() * size);
                 y = (int) (Math.random() * size);
                 dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
@@ -171,9 +169,7 @@ public class CreatePuzzle {
                     puzzle.get(y + i).set(x + i, String.valueOf(word.charAt(i)).toUpperCase());
                 }
             }
-            
 
-            
         }
 
         // preencher o puzzle com letras aleatorias
@@ -184,7 +180,7 @@ public class CreatePuzzle {
                 }
             }
         }
-        
+
         return puzzle;
     }
 
