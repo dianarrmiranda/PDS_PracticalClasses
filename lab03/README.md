@@ -1,3 +1,12 @@
 # Aula03 - Notes
 
-to do
+Jogo do Galo:
+    - To compile: javac ./lab03/JogoDoGalo/JGalo.java ./lab03 JogoDoGalo/JGaloInterface.java ./lab03/JogoDoGalo/JGaloSolver.java 
+
+    - To play: (without arguments) java lab03/JogoDoGalo/JGalo
+               (with arguments)    java lab03/JogoDoGalo/JGalo O or java lab03/JogoDoGalo/JGalo X
+
+    By default, if you run the game without arguments the first player is X.
+
+
+
