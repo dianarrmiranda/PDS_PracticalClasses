@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 import static java.lang.System.*; // Para não ter de escrever sempre System.out.println
 
-import java.io.FileWriter;
-import java.io.File;
-
 public class VoosMain {
     public static void main(String[] args) throws IOException {
         String[] op;
@@ -24,6 +21,11 @@ public class VoosMain {
     }
 
     public static void menu(String[] op, String[] args) {
+
+        List<String> file = new ArrayList<String>();
+        Aviao aviao;
+        Voo voo;
+
         switch (op[0]) { 
             case "H":
                 out.println("--------------------------------------------------------------------------------------------------------------------------------");
@@ -46,9 +48,33 @@ public class VoosMain {
                 out.println("");
                 break;
             case "I": 
-                LerFicheiro(op[1]);
+                file = LerFicheiro(op[1]);
+                
+                if (file.get(2).contains("x"))
+                {   
+                    List <String> reserva = new ArrayList<String>();
+                    
+                    for (int i = 3; i<file.size(); i++){
+                        reserva.add(file.get(i));
+                    }
+                    aviao = new Aviao(file.get(1),file.get(2));
+                    voo = new Voo(file.get(0),aviao,reserva);
+                }else{
+                    List <String> reserva = new ArrayList<String>();
+                    
+                    for (int i = 2; i<file.size(); i++){
+                        reserva.add(file.get(i));
+                    }
+                    aviao = new Aviao(file.get(1));
+                    voo = new Voo(file.get(0),aviao,reserva);
+                }
+                out.println(voo.toString());
+
+
+                
                 break;
-            case "M":break;
+            case "M":
+                out.println("M"+ voo.FlightCodetoString());
             case "F":break;
             case "R":break;
             case "C":break;
@@ -62,32 +88,32 @@ public class VoosMain {
     }
 
     public static List<String> LerFicheiro(String file) {
-        String linha = "";
-        String CodVoo = "";
-        List<String> words = new ArrayList<String>();
+        String linha[];
+        List<String> ContentFromFile = new ArrayList<String>();
 
         try {
             FileReader arq = new FileReader(file);
             BufferedReader lerArq = new BufferedReader(arq);
-            linha = lerArq.readLine(); // Pode vir a levar .trim() para tirar os espaços em branco
-            if (linha.charAt(0) != '>') { // O if tá fora do while, porque só queremos verificar a primeira linha uma vez
-                out.println("O ficheiro não começa com o carater \">\"");
-                exit(0); // sai do programa
-            }
-            CodVoo= linha.substring(1,7); // Vamos assumir que apesar dos codigos de voo variarem, têm este tamanho maximo
-            out.println(CodVoo);    
-            // Como ir buscar agora para quando há exec e turista? FAzer trim na linha e depois ver se tem mais alguma coisa??
-            // Não queria fazer com String[]
+            //split by > and by space
+            linha = lerArq.readLine().split("[>, ]");
 
-            // Criar o objeto avião logo aqui???????????'?'
-            while ((linha = lerArq.readLine()) != null) {
+            if(linha.length>4 || linha.length<3){ // metemos 4 e 3 porque não nos apeteceu tratar da 1ª linha vazia
+                System.err.println("ERROR: Invalid type of input file. ");
+                arq.close();
+                return null;  
             }
+
+                    
+            for (int i = 1; i < linha.length; i++) {
+                ContentFromFile.add(linha[i]);
+            }
+            
             arq.close();
         } catch (IOException e) {
             err.printf("Erro na abertura do arquivo: %s.\n",
                 e.getMessage()); // aqui também podia ser System.out.println("Erro na abertura do arquivo: ");
         }
 
-        return words;
+        return ContentFromFile;
     }
 }
