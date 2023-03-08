@@ -26,6 +26,17 @@ public class Aviao {
         this.T_Seats.add(Integer.parseInt(seats[1]));
     }
 
+    public int getE_Columns() {
+        if(E_Seats.size() == 0){
+            return 0;
+        }
+        return E_Seats.get(0);
+    }
+
+    public int getT_Columns() {
+        return T_Seats.get(0);
+    }
+
     public int getE_Seats() {
         if(E_Seats.size() == 0){
             return 0;
