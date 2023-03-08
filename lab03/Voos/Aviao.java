@@ -7,9 +7,6 @@ public class Aviao {
 
     private List<Integer> E_Seats = new ArrayList<Integer>();
     private List<Integer> T_Seats = new ArrayList<Integer>();
-    private int numFilas;
-    
-    public Aviao(){}
 
     public Aviao(String E_Seats, String T_Seats) {
         String[] seatsE = E_Seats.split("x");
@@ -21,14 +18,6 @@ public class Aviao {
         seatsE = T_Seats.split("x");
         this.T_Seats.add(Integer.parseInt(seatsE[0]));
         this.T_Seats.add(Integer.parseInt(seatsE[1]));
-
-        if(this.E_Seats.get(1) > this.T_Seats.get(1)){
-            this.numFilas = this.E_Seats.get(1);
-        }
-        else{
-            this.numFilas = this.T_Seats.get(1);
-        }
-
     }
 
     public Aviao(String T_Seats) {
@@ -38,11 +27,35 @@ public class Aviao {
     }
 
     public int getE_Seats() {
+        if(E_Seats.size() == 0){
+            return 0;
+        }
         return E_Seats.get(0) * E_Seats.get(1);
     }
 
     public int getT_Seats() {
+
         return T_Seats.get(0) * T_Seats.get(1);
+    }
+
+    public int getNumFilas() {
+        if (E_Seats.size() == 0)
+            return T_Seats.get(1);
+        else{
+            if(T_Seats.get(1) > E_Seats.get(1)){
+                return T_Seats.get(1);
+            }
+
+            return E_Seats.get(1);
+        }       
+    }
+
+    public int getNumColunas() {
+        if (E_Seats.size() == 0)
+            return T_Seats.get(0);
+        else{
+            return E_Seats.get(0) + T_Seats.get(0);
+        }       
     }
 
     // public String getFlightCode(){
@@ -50,7 +63,10 @@ public class Aviao {
     // }
 
     public String toString() {
-        return "Lugares disponíveis: \n" + getE_Seats() + " lugares em classe Executiva; " + getT_Seats() + " lugares em classe Turística.";
+        if (E_Seats.size() == 0) {
+            return "Lugares disponíveis: " + getT_Seats() + " lugares em classe Turística.\nClasse executiva não disponível neste voo.";
+        }
+        return "Lugares disponíveis: " + getE_Seats() + " lugares em classe Executiva; " + getT_Seats() + " lugares em classe Turística.";
     }
 
     

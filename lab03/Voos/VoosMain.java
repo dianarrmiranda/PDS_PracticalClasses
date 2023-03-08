@@ -14,21 +14,19 @@ public class VoosMain {
     public static void main(String[] args) throws IOException {
         String[] command;
         Scanner sc = new Scanner(in);
-        Aviao aviao = null;
-        Voo voo = null;
         do {
             out.println("Escolha uma opção: (H para ajuda)");
             command = sc.nextLine().split(" "); 
-            menu(command,args,aviao,voo);
+            menu(command,args);
             
         } while (!command[0].equals("Q")); // O command 0 vai ser a letra
         sc.close();
     }
 
-    public static void menu(String[] command, String[] args, Aviao aviao, Voo voo) {
+    public static void menu(String[] command, String[] args) {
 
         List<String> file = new ArrayList<String>();
-        
+
 
         switch (command[0]) { 
             case "H":
@@ -52,17 +50,23 @@ public class VoosMain {
                 out.println("");
                 break;
             case "I": 
+                Aviao aviao = null;
+                Voo voo = null;
+
                 file = LerFicheiro(command[1]);
-                
-                if (file.get(2).contains("x"))
+
+                out.println();
+                if (file.size() > 2 && file.get(2).contains("x"))
                 {   
                     List <String> reserva = new ArrayList<String>();
-                    
                     for (int i = 3; i<file.size(); i++){
                         reserva.add(file.get(i));
                     }
+
                     aviao = new Aviao(file.get(1),file.get(2));
                     voo = new Voo(file.get(0),aviao,reserva);
+                    Info.put(file.get(0),voo); // file.get(0) é o código do voo
+
                 }else{
                     List <String> reserva = new ArrayList<String>();
                     
@@ -73,11 +77,20 @@ public class VoosMain {
                     voo = new Voo(file.get(0),aviao,reserva);
                 }
                 out.println(voo.toString());
-                Info.put(file.get(0),voo); // file.get(0) é o código do voo
+                voo.countReservas();
                 break;
                 
             case "M":
-                out.print("M "+ voo.FlightCodetoString());
+                String codeVoo = command[1];
+                if (Info.containsKey(codeVoo)){
+                    Info.get(codeVoo).getBookingMap();
+                }
+                else{
+                    out.println("O voo não existe");
+                }
+
+                break;
+
             case "F":
                if (command.length == 3){ // Só lugares na turistica
                     Aviao aviaoF = new Aviao(command[2]);
@@ -111,24 +124,34 @@ public class VoosMain {
     }
 
     public static List<String> LerFicheiro(String file) {
-        String linha[];
+        String linha;
         List<String> ContentFromFile = new ArrayList<String>();
 
         try {
             FileReader arq = new FileReader(file);
             BufferedReader lerArq = new BufferedReader(arq);
             //split by > and by space
-            linha = lerArq.readLine().split("[>, ]");
+            linha = lerArq.readLine();
 
-            if(linha.length>4 || linha.length<3){ // metemos 4 e 3 porque não nos apeteceu tratar da 1ª linha vazia
+            String[] firstLine = linha.split("[>, ]");
+
+
+            if(firstLine.length>4 || firstLine.length<3){ // metemos 4 e 3 porque não nos apeteceu tratar da 1ª linha vazia
                 System.err.println("ERROR: Invalid type of input file. ");
                 arq.close();
                 return null;  
             }
-
                     
-            for (int i = 1; i < linha.length; i++) {
-                ContentFromFile.add(linha[i]);
+            for (int i = 1; i < firstLine.length; i++) {
+                ContentFromFile.add(firstLine[i]);
+            }
+
+            while ((linha = lerArq.readLine()) != null) {
+                if (linha.isEmpty()) { // Requisito de entrada 5
+                    System.out.println("Existem linhas vazias no ficheiro.");
+                    System.exit(0); // sai do programa
+                }
+                ContentFromFile.add(linha);
             }
             
             arq.close();
