@@ -9,6 +9,7 @@ public class Aviao {
     private List<Integer> T_Seats = new ArrayList<Integer>();
     private int numFilas;
     
+    public Aviao(){}
 
     public Aviao(String E_Seats, String T_Seats) {
         String[] seatsE = E_Seats.split("x");
@@ -49,7 +50,7 @@ public class Aviao {
     // }
 
     public String toString() {
-        return "Lugares disponíveis: \n" + getE_Seats() + " lugares em executiva; " + getT_Seats() + " lugares em turística.";
+        return "Lugares disponíveis: \n" + getE_Seats() + " lugares em classe Executiva; " + getT_Seats() + " lugares em classe Turística.";
     }
 
     

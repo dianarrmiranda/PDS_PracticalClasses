@@ -4,29 +4,33 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 import java.util.Scanner;
 import static java.lang.System.*; // Para não ter de escrever sempre System.out.println
 
 public class VoosMain {
+
+    static HashMap<String, Voo> Info = new HashMap<>();
     public static void main(String[] args) throws IOException {
-        String[] op;
+        String[] command;
         Scanner sc = new Scanner(in);
+        Aviao aviao = null;
+        Voo voo = null;
         do {
             out.println("Escolha uma opção: (H para ajuda)");
-            op = sc.nextLine().split(" ");
-            menu(op,args);
+            command = sc.nextLine().split(" "); 
+            menu(command,args,aviao,voo);
             
-        } while (!op[0].equals("Q")); // O ops 0 vai ser a letra
+        } while (!command[0].equals("Q")); // O command 0 vai ser a letra
         sc.close();
     }
 
-    public static void menu(String[] op, String[] args) {
+    public static void menu(String[] command, String[] args, Aviao aviao, Voo voo) {
 
         List<String> file = new ArrayList<String>();
-        Aviao aviao;
-        Voo voo;
+        
 
-        switch (op[0]) { 
+        switch (command[0]) { 
             case "H":
                 out.println("--------------------------------------------------------------------------------------------------------------------------------");
                 out.println("Selecionou a opção H-> Ajuda");
@@ -48,7 +52,7 @@ public class VoosMain {
                 out.println("");
                 break;
             case "I": 
-                file = LerFicheiro(op[1]);
+                file = LerFicheiro(command[1]);
                 
                 if (file.get(2).contains("x"))
                 {   
@@ -69,13 +73,32 @@ public class VoosMain {
                     voo = new Voo(file.get(0),aviao,reserva);
                 }
                 out.println(voo.toString());
-
-
-                
+                Info.put(file.get(0),voo); // file.get(0) é o código do voo
                 break;
+                
             case "M":
-                out.println("M"+ voo.FlightCodetoString());
-            case "F":break;
+                out.print("M "+ voo.FlightCodetoString());
+            case "F":
+               if (command.length == 3){ // Só lugares na turistica
+                    Aviao aviaoF = new Aviao(command[2]);
+                    Voo vooF = new Voo(command[1],aviaoF);
+                    //aviao.getT_Seats(); // retorna o número de lugares na turistica
+                    //voo.setCode(command[2]); // Set flight code
+                    Info.put(command[1],vooF);
+                    out.println("The flight was inserted with success\n");
+                    out.printf("%s\n", Info.get(command[1]));
+               }
+               else if(command.length == 4){// executiva + turistica
+                    Aviao aviaoF = new Aviao(command[2],command[3]);
+                    Voo vooF = new Voo(command[1],aviaoF);
+                    Info.put(command[1],vooF);
+                    out.println("The flight was inserted with success\n");
+                    out.printf("%s\n", Info.get(command[1]));
+               }
+               else{
+                   out.println("Número de argumentos inválido");
+               }
+               break;
             case "R":break;
             case "C":break;
             case "Q": // terminar o programa
