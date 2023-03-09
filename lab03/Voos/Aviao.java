@@ -96,9 +96,7 @@ public class Aviao {
 
     public List<List<Integer>> addReserve(int nOrder, int numSeats, String type) {
         int count = 0;
-
         if (type.equals("E")) {
-            
             for (int i = 0; i < numSeats; i++) {
                 if (count < E_Seats.get(1)) {
                     while( seatsOcupied.get(count).get(countE) != 0){
