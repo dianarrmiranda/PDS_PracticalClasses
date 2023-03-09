@@ -1,4 +1,5 @@
 package lab03.Voos;
+import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,21 +10,35 @@ import java.util.Scanner;
 import static java.lang.System.*; // Para não ter de escrever sempre System.out.println
 
 public class VoosMain {
-
     static HashMap<String, Voo> Info = new HashMap<>();
     public static void main(String[] args) throws IOException {
         String[] command;
+        
+
+        if(args.length == 1){
+            File ComandosDoFicheiro = new File("lab03/Voos/"+args[0]);
+            if(!ComandosDoFicheiro.exists()){
+                out.println("File not found");
+                exit(0);
+            }
+            Scanner sc= new Scanner(ComandosDoFicheiro);
+            while(sc.hasNext()){
+                menu(sc.nextLine().split(" "));
+            }
+            sc.close();
+        }
+
         Scanner sc = new Scanner(in);
         do {
             out.println("Escolha uma opção: (H para ajuda)");
             command = sc.nextLine().split(" "); 
-            menu(command,args);
+            menu(command);
             
         } while (!command[0].equals("Q")); // O command 0 vai ser a letra
         sc.close();
     }
 
-    public static void menu(String[] command, String[] args) {
+    public static void menu(String[] command) {
 
         List<String> file = new ArrayList<String>();
 
@@ -123,6 +138,7 @@ public class VoosMain {
                     if (flight_code_AND_sequential_reservation_number[0].equals(flight_code)) {
                         Voo vooC = Info.get(flight_code); //Encontra o voo pelo codigo
                         vooC.RmReserve(flight_code_AND_sequential_reservation_number); //remove as reservas. É passado o codigo do voo e as reservas
+                        
                         Info.put(flight_code, vooC);
                         out.print("The reserv was cancelled with success\n");
                     }
