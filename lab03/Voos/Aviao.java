@@ -8,7 +8,7 @@ public class Aviao {
     private List<Integer> E_Seats = new ArrayList<Integer>();
     private List<Integer> T_Seats = new ArrayList<Integer>();
     private List<List<Integer>> seatsOcupied = new ArrayList<>();
-    private Integer countT = 0, countE = 0;
+    private Integer countT , countE;
 
     public Aviao(String E_Seats, String T_Seats) {
         String[] seatsE = E_Seats.split("x");
@@ -28,8 +28,10 @@ public class Aviao {
             }
             seatsOcupied.add(row);
         }   
-
+        countE = 0;
         this.countT = getT_Columns();
+
+        
     }
 
     public Aviao(String T_Seats) {
@@ -93,11 +95,20 @@ public class Aviao {
     }
 
     public List<List<Integer>> addReserve(int nOrder, int numSeats, String type) {
+        int count = 0;
 
         if (type.equals("E")) {
-            int count = 0;
+            
             for (int i = 0; i < numSeats; i++) {
                 if (count < E_Seats.get(1)) {
+                    while( seatsOcupied.get(count).get(countE) != 0){
+                        if (count < E_Seats.get(1)) {
+                            count++;
+                        } else {
+                            countE++;
+                            count = 0;
+                        }
+                    }
                     seatsOcupied.get(count).set(countE, nOrder+1);
                     count++;
                 } else {
@@ -107,35 +118,31 @@ public class Aviao {
 
                 }
             }
-        } else if (type.equals("T")) {
-            int count = 0;
-            if (E_Seats.size() != 0) {
-                for (int i = 0; i < numSeats; i++) {
-                    if (count < T_Seats.get(1)) {
-                        seatsOcupied.get(count).set(countT, nOrder+1);
-                        count++;
-                    } else {
-                        countT++;
-                        count = 0;
-                        seatsOcupied.get(count).set(countT, nOrder+1);
-
+        }else if (type.equals("T")) {
+            for (int i = 0; i < numSeats; i++) {
+                if (count < T_Seats.get(1)) {
+                    while( seatsOcupied.get(count).get(countT) != 0){
+                        if (count < T_Seats.get(1)) {
+                            count++;
+                        } else {
+                            countT++;
+                            count = 0;
+                        }
                     }
-                }
-            } else {
-                for (int i = 0; i < numSeats; i++) {
-                    if (count < T_Seats.get(1)) {
-                        seatsOcupied.get(count).set(countT, nOrder+1);
-                        count++;
-                    } else {
-                        countT++;
-                        count = 0;
-                        seatsOcupied.get(count).set(countT, nOrder+1);
+                    seatsOcupied.get(count).set(countT, nOrder+1);
+                    System.out.println("3: " + count + " " + countT + " " + nOrder);
+                    count++;
+                } else {
+                    countT++;
+                    count = 0;
+                    seatsOcupied.get(count).set(countT, nOrder+1);
+                    System.out.println("4: " + count + " " + countT + " " + nOrder);
 
-                    }
                 }
             }
-
         }
+
+        
 
         return seatsOcupied;
 
