@@ -11,6 +11,7 @@ public class Voo {
     private Aviao plane;
     private List<String> reservas;
     private Integer tReserved = 0, eReserved = 0;
+    private List<List<Integer>> seatsOcupied = new ArrayList<>();
 
     public Voo(String code, Aviao plane, List<String> reservas) {
         this.code = code;
@@ -50,51 +51,57 @@ public class Voo {
 
     }
 
-    public void RmReserve(String[] flight_code_AND_sequential_reservation_number){
+    public void RmReserve(String[] flight_code_AND_sequential_reservation_number) {
         this.reservas.remove(Integer.parseInt(flight_code_AND_sequential_reservation_number[1]));
         this.plane.delReserve(Integer.parseInt(flight_code_AND_sequential_reservation_number[1].trim()));
     }
 
+    public void addReserves() {
+        for (int i = 0; i < reservas.size(); i++) {
+            if (reservas.get(i).contains("T")) {
+                seatsOcupied = plane.addReserve(i, Integer.parseInt(reservas.get(i).split(" ")[1]), "T");
+
+            } else if (reservas.get(i).contains("E")) {
+                seatsOcupied = plane.addReserve(i, Integer.parseInt(reservas.get(i).split(" ")[1]), "E");
+            }
+        }
+
+    }
+
     public void getBookingMap() {
+        addReserves();
         Map<Character, List<Integer>> bookingMap = new HashMap<>();
         for (int i = 65; i < 65 + plane.getNumFilas(); i++) {
-            List<Integer> temp = new ArrayList<>();
-            for(int col = 0; col < plane.getNumColunas(); col++)
-            {
-                temp.add(00);
-
-            }
-
-            bookingMap.put((char)i, temp);
+            bookingMap.put((char) i, seatsOcupied.get(i-65));
+            
         }
         stringBookingMap(bookingMap);
     }
+
     public void stringBookingMap(Map<Character, List<Integer>> bookingMap) {
 
         System.out.print(" ");
         for (int i = 1; i <= plane.getNumColunas(); i++) {
-            System.out.printf("   %02d",i);
+            System.out.printf("   %02d", i);
         }
         System.out.println();
 
-        for(Character key: bookingMap.keySet()){
+        for (Character key : bookingMap.keySet()) {
             System.out.print(key);
-            for( Integer value: bookingMap.get(key)) {
-                System.out.printf("   %02d",value);
+            for (Integer value : bookingMap.get(key)) {
+                System.out.printf("   %02d", value);
             }
             System.out.println();
         }
 
     }
-    
 
-    public String toString(){
-        return "Código de voo " + code+ ". " + plane.toString();
+    public String toString() {
+        return "Código de voo " + code + ". " + plane.toString();
     }
 
-
-   public String FlightCodetoString() {
-        return "Código de voo " + code+ ". ";
+    public String FlightCodetoString() {
+        return "Código de voo " + code + ". ";
     }
-    
+
 }
