@@ -69,9 +69,21 @@ public class Aviao {
         }       
     }
 
-    // public String getFlightCode(){
-    //     return
-    // }
+    // É suposto quando damos delete o numero de lugares available aumente? Ou como foi cancelado, aqueles lugares não podem mais ser ocupados?
+    public void delReserve(int reserve_number) { // Será que é preciso distinguir entre os lugares iniciais e os lugares available?
+        for (int i = 0; i < getE_Seats(); i++) {
+            if (E_Seats.get(i) == reserve_number) {
+            E_Seats(i) = 0;
+            System.out.println(E_Seats);
+            }
+        }
+        for (int i = 0; i < getT_Seats(); i++) {// Será que é preciso distinguir entre os lugares iniciais e os lugares available?
+            if (T_Seats.get(i) == reserve_number) {
+            T_Seats(i) = 0;
+            System.out.println(T_Seats);
+            }
+        }
+    }
 
     public String toString() {
         if (E_Seats.size() == 0) {

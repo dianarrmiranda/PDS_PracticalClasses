@@ -50,6 +50,11 @@ public class Voo {
 
     }
 
+    public void RmReserve(String[] flight_code_AND_sequential_reservation_number){
+        this.reservas.remove(Integer.parseInt(flight_code_AND_sequential_reservation_number[1]));
+        this.plane.delReserve(Integer.parseInt(flight_code_AND_sequential_reservation_number[1].trim()));
+    }
+
     public void getBookingMap() {
         Map<Character, List<Integer>> bookingMap = new HashMap<>();
         for (int i = 65; i < 65 + plane.getNumFilas(); i++) {

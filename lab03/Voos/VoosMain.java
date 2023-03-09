@@ -46,6 +46,9 @@ public class VoosMain {
                 out.println("");
                 out.println("<> Opção C reservation_code");
                 out.println("                 Cancela uma reserva. O código de reserva tem o formato: flight_code:sequential_reservation_number");
+                out.println("");
+                out.println("<> Opção Q");
+                out.println("                 Terminar execução do programa");
                 out.println("--------------------------------------------------------------------------------------------------------------------------------");
                 out.println("");
                 break;
@@ -75,8 +78,9 @@ public class VoosMain {
                     }
                     aviao = new Aviao(file.get(1));
                     voo = new Voo(file.get(0),aviao,reserva);
+                    Info.put(file.get(0),voo); // file.get(0) é o código do voo
                 }
-                out.println(voo.toString());
+                out.print(voo.toString());
                 voo.countReservas();
                 break;
                 
@@ -98,14 +102,14 @@ public class VoosMain {
                     //aviao.getT_Seats(); // retorna o número de lugares na turistica
                     //voo.setCode(command[2]); // Set flight code
                     Info.put(command[1],vooF);
-                    out.println("The flight was inserted with success\n");
+                    out.print("The flight was inserted with success\n");
                     out.printf("%s\n", Info.get(command[1]));
                }
                else if(command.length == 4){// executiva + turistica
                     Aviao aviaoF = new Aviao(command[2],command[3]);
                     Voo vooF = new Voo(command[1],aviaoF);
                     Info.put(command[1],vooF);
-                    out.println("The flight was inserted with success\n");
+                    out.print("The flight was inserted with success\n");
                     out.printf("%s\n", Info.get(command[1]));
                }
                else{
@@ -113,7 +117,17 @@ public class VoosMain {
                }
                break;
             case "R":break;
-            case "C":break;
+            case "C":
+                String[] flight_code_AND_sequential_reservation_number = command[1].split(":");
+                for (String flight_code : Info.keySet()) { 
+                    if (flight_code_AND_sequential_reservation_number[0].equals(flight_code)) {
+                        Voo vooC = Info.get(flight_code); //Encontra o voo pelo codigo
+                        vooC.RmReserve(flight_code_AND_sequential_reservation_number); //remove as reservas. É passado o codigo do voo e as reservas
+                        Info.put(flight_code, vooC);
+                        out.print("The reserv was cancelled with success\n");
+                    }
+                }
+                break;
             case "Q": // terminar o programa
                 out.println("Terminou a execução do programa.");
                 break;
@@ -130,18 +144,18 @@ public class VoosMain {
         try {
             FileReader arq = new FileReader(file);
             BufferedReader lerArq = new BufferedReader(arq);
-            //split by > and by space
+            // split by > and by space
             linha = lerArq.readLine();
 
             String[] firstLine = linha.split("[>, ]");
 
-
-            if(firstLine.length>4 || firstLine.length<3){ // metemos 4 e 3 porque não nos apeteceu tratar da 1ª linha vazia
+            if (firstLine.length > 4 || firstLine.length < 3) { // metemos 4 e 3 porque não nos apeteceu tratar da 1ª
+                                                                // linha vazia
                 System.err.println("ERROR: Invalid type of input file. ");
                 arq.close();
-                return null;  
+                return null;
             }
-                    
+
             for (int i = 1; i < firstLine.length; i++) {
                 ContentFromFile.add(firstLine[i]);
             }
@@ -153,11 +167,11 @@ public class VoosMain {
                 }
                 ContentFromFile.add(linha);
             }
-            
+
             arq.close();
         } catch (IOException e) {
             err.printf("Erro na abertura do arquivo: %s.\n",
-                e.getMessage()); // aqui também podia ser System.out.println("Erro na abertura do arquivo: ");
+                    e.getMessage()); // aqui também podia ser System.out.println("Erro na abertura do arquivo: ");
         }
 
         return ContentFromFile;
