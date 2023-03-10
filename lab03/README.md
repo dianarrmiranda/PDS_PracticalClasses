@@ -9,8 +9,9 @@ Jogo do Galo:
     By default, if you run the game without arguments the first player is X.
 
 Voos: 
-    - To compile: javac ./lab03/Voos/VoosMain.java ./lab03/Voos/Voo.java ./lab03/Voos/Aviao.java ./lab03/Voos/Classes.java ./lab03/Voos/Reserva.java  
+    - To compile: javac ./lab03/Voos/VoosMain.java ./lab03/Voos/Voo.java ./lab03/Voos/Aviao.java
 
-    - To play: java lab03/Voos/VoosMain
+    - To execute:   (without arguments) java lab03/Voos/VoosMain
+                    (with arguments)    java lab03/Voos/VoosMain Comandos.txt
 
-
+Note: You probably have to update package(s) in different files before trying to compile the program.

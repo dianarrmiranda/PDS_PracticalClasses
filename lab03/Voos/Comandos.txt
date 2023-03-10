@@ -1,3 +1,10 @@
 H
 I lab03/Voos/flight1.txt
+I lab03/Voos/flight2.txt
 F AT1500 14x3 2x5
+F AT1700 2x8
+M TP1920
+M TP1930
+R TP1920 T 2
+M TP1920  
+Q

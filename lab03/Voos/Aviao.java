@@ -7,8 +7,7 @@ public class Aviao {
 
     private List<Integer> E_Seats = new ArrayList<Integer>();
     private List<Integer> T_Seats = new ArrayList<Integer>();
-    private List<List<Integer>> seatsOcupied = new ArrayList<>();
-    private Integer countT , countE;
+
 
     public Aviao(String E_Seats, String T_Seats) {
         String[] seatsE = E_Seats.split("x");
@@ -19,19 +18,6 @@ public class Aviao {
         seatsE = T_Seats.split("x");
         this.T_Seats.add(Integer.parseInt(seatsE[0]));
         this.T_Seats.add(Integer.parseInt(seatsE[1]));
-
-        // inicializar seatsocupied com 0
-        for (int i = 0; i < getNumFilas(); i++) {
-            List<Integer> row = new ArrayList<>();
-            for (int j = 0; j < getNumColunas(); j++) {
-                row.add(0);
-            }
-            seatsOcupied.add(row);
-        }   
-        countE = 0;
-        this.countT = getT_Columns();
-
-        
     }
 
     public Aviao(String T_Seats) {
@@ -39,16 +25,14 @@ public class Aviao {
         this.T_Seats.add(Integer.parseInt(seats[0]));
         this.T_Seats.add(Integer.parseInt(seats[1]));
 
-        // inicializar seatsocupied com 0
-        for (int i = 0; i < getNumFilas(); i++) {
-            List<Integer> row = new ArrayList<>();
-            for (int j = 0; j < getNumColunas(); j++) {
-                row.add(0);
-            }
-            seatsOcupied.add(row);
-        }
+    }
 
-        this.countT = getT_Columns();
+    public List<Integer> getE_Seats() {
+        return E_Seats;
+    }
+
+    public List<Integer> getT_Seats() {
+        return T_Seats;
     }
 
     public int getE_Columns() {
@@ -62,15 +46,25 @@ public class Aviao {
         return T_Seats.get(0);
     }
 
-    public int getE_Seats() {
+    public int getE_Filas() {
+        if (E_Seats.size() == 0) {
+            return 0;
+        }
+        return E_Seats.get(1);
+    }
+
+    public int getT_Filas() {
+        return T_Seats.get(1);
+    }
+
+    public int getE_TotalSeats() {
         if (E_Seats.size() == 0) {
             return 0;
         }
         return E_Seats.get(0) * E_Seats.get(1);
     }
 
-    public int getT_Seats() {
-
+    public int getT_TotalSeats() {
         return T_Seats.get(0) * T_Seats.get(1);
     }
 
@@ -94,83 +88,29 @@ public class Aviao {
         }
     }
 
-    public List<List<Integer>> addReserve(int nOrder, int numSeats, String type) {
-        int count = 0;
-        if (type.equals("E")) {
-            for (int i = 0; i < numSeats; i++) {
-                if (count < E_Seats.get(1)) {
-                    while( seatsOcupied.get(count).get(countE) != 0){
-                        if (count < E_Seats.get(1)) {
-                            count++;
-                        } else {
-                            countE++;
-                            count = 0;
-                        }
-                    }
-                    seatsOcupied.get(count).set(countE, nOrder+1);
-                    count++;
-                } else {
-                    countE++;
-                    count = 0;
-                    seatsOcupied.get(count).set(countE, nOrder+1);
+   
 
-                }
-            }
-        }else if (type.equals("T")) {
-            for (int i = 0; i < numSeats; i++) {
-                if (count < T_Seats.get(1)) {
-                    while( seatsOcupied.get(count).get(countT) != 0){
-                        if (count < T_Seats.get(1)) {
-                            count++;
-                        } else {
-                            countT++;
-                            count = 0;
-                        }
-                    }
-                    seatsOcupied.get(count).set(countT, nOrder+1);
-                    System.out.println("3: " + count + " " + countT + " " + nOrder);
-                    count++;
-                } else {
-                    countT++;
-                    count = 0;
-                    seatsOcupied.get(count).set(countT, nOrder+1);
-                    System.out.println("4: " + count + " " + countT + " " + nOrder);
-
-                }
-            }
-        }
-
-        
-
-        return seatsOcupied;
-
-    }
-
-    // É suposto quando damos delete o numero de lugares available aumente? Ou como
-    // foi cancelado, aqueles lugares não podem mais ser ocupados?
-    public void delReserve(int reserve_number) { // Será que é preciso distinguir entre os lugares iniciais e os lugares
-                                                 // available?
-        for (int i = 0; i < getE_Seats(); i++) {
+    public void delReserve(int reserve_number) {
+        for (int i = 0; i <= getE_TotalSeats(); i++) {
             if (E_Seats.get(i) == reserve_number) {
                 E_Seats.add(i, 0);
-                System.out.println(E_Seats);
+                //System.out.println(E_Seats); //o print do flight1 dá [3, 0, 2]
             }
-        }
-        for (int i = 0; i < getT_Seats(); i++) {// Será que é preciso distinguir entre os lugares iniciais e os lugares
-                                                // available?
-            if (T_Seats.get(i) == reserve_number) {
-                T_Seats.add(i, 0);
-                System.out.println(T_Seats);
-            }
-        }
+        }  
+        // for (int i = 0; i <= getT_TotalSeats(); i++) {
+        //     if (T_Seats.get(i) == reserve_number) {
+        //         T_Seats.add(i, 0);
+        //         System.out.println(T_Seats);
+        //     }
+        // }
     }
 
     public String toString() {
         if (E_Seats.size() == 0) {
-            return "Lugares disponíveis: " + getT_Seats()
+            return "Lugares disponíveis: " + getT_TotalSeats()
                     + " lugares em classe Turística.\nClasse executiva não disponível neste voo.";
         }
-        return "Lugares disponíveis: " + getE_Seats() + " lugares em classe Executiva; " + getT_Seats()
+        return "Lugares disponíveis: " + getE_TotalSeats() + " lugares em classe Executiva; " + getT_TotalSeats()
                 + " lugares em classe Turística.";
     }
 

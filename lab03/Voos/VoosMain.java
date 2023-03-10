@@ -16,12 +16,12 @@ public class VoosMain {
         
 
         if(args.length == 1){
-            File ComandosDoFicheiro = new File("lab03/Voos/"+args[0]);
+            File ComandosDoFicheiro = new File("lab03/Voos/"+args[0]); // assim não é preciso escrever o caminho todo
             if(!ComandosDoFicheiro.exists()){
                 out.println("File not found");
                 exit(0);
             }
-            Scanner sc= new Scanner(ComandosDoFicheiro);
+            Scanner sc= new Scanner(ComandosDoFicheiro); // é preciso ter 2 scanners, um para o ficheiro e outro para o input
             while(sc.hasNext()){
                 menu(sc.nextLine().split(" "));
             }
@@ -34,7 +34,7 @@ public class VoosMain {
             command = sc.nextLine().split(" "); 
             menu(command);
             
-        } while (!command[0].equals("Q")); // O command 0 vai ser a letra
+        } while (!command[0].equals("Q")); // O command[0] vai ser a letra
         sc.close();
     }
 
@@ -68,12 +68,11 @@ public class VoosMain {
                 out.println("");
                 break;
             case "I": 
+                out.println();
                 Aviao aviao = null;
                 Voo voo = null;
 
                 file = LerFicheiro(command[1]);
-
-                out.println();
                 if (file.size() > 2 && file.get(2).contains("x"))
                 {   
                     List <String> reserva = new ArrayList<String>();
@@ -100,9 +99,12 @@ public class VoosMain {
                 break;
                 
             case "M":
+                out.println();
                 String codeVoo = command[1];
                 if (Info.containsKey(codeVoo)){
+                    Info.get(codeVoo).addReserves(1, 0, "");
                     Info.get(codeVoo).getBookingMap();
+                    Info.get(codeVoo).stringBookingMap();
                 }
                 else{
                     out.println("O voo não existe");
@@ -111,19 +113,18 @@ public class VoosMain {
                 break;
 
             case "F":
+                out.println();
                if (command.length == 3){ // Só lugares na turistica
                     Aviao aviaoF = new Aviao(command[2]);
                     Voo vooF = new Voo(command[1],aviaoF);
-                    //aviao.getT_Seats(); // retorna o número de lugares na turistica
-                    //voo.setCode(command[2]); // Set flight code
-                    Info.put(command[1],vooF);
+                    Info.put(command[1],vooF);// colocar o voo na hashmap
                     out.print("The flight was inserted with success\n");
                     out.printf("%s\n", Info.get(command[1]));
                }
                else if(command.length == 4){// executiva + turistica
                     Aviao aviaoF = new Aviao(command[2],command[3]);
                     Voo vooF = new Voo(command[1],aviaoF);
-                    Info.put(command[1],vooF);
+                    Info.put(command[1],vooF);// colocar o voo na hashmap
                     out.print("The flight was inserted with success\n");
                     out.printf("%s\n", Info.get(command[1]));
                }
@@ -131,20 +132,35 @@ public class VoosMain {
                    out.println("Número de argumentos inválido");
                }
                break;
-            case "R":break;
+            case "R":
+                out.println();
+                String newVoo = command[1];
+
+                if (Info.containsKey(newVoo)){
+                    Info.get(newVoo).addReserves(2, Integer.parseInt(command[3]), command[2]);
+                    Info.get(newVoo).getBookingMap();
+                    Info.get(newVoo).printReserve(Info.get(newVoo).getNOrder());
+    
+                }
+                else{
+                    out.println("O voo não existe");
+                }
+               
+            break;
             case "C":
+                out.println();
                 String[] flight_code_AND_sequential_reservation_number = command[1].split(":");
                 for (String flight_code : Info.keySet()) { 
                     if (flight_code_AND_sequential_reservation_number[0].equals(flight_code)) {
                         Voo vooC = Info.get(flight_code); //Encontra o voo pelo codigo
                         vooC.RmReserve(flight_code_AND_sequential_reservation_number); //remove as reservas. É passado o codigo do voo e as reservas
-                        
                         Info.put(flight_code, vooC);
-                        out.print("The reserv was cancelled with success\n");
+                        out.print("The reserve was cancelled with success\n");
                     }
                 }
                 break;
             case "Q": // terminar o programa
+                out.println();
                 out.println("Terminou a execução do programa.");
                 break;
             default:
