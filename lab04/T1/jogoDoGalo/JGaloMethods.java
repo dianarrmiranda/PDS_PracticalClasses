@@ -1,3 +1,4 @@
+
 public class JGaloMethods implements JGaloInterface {
     char player;
     boolean over;

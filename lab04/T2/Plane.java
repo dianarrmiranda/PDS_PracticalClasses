@@ -12,7 +12,6 @@ public class Plane {
     private ArrayList<Reservation> Reservations = new ArrayList<Reservation>();
     // private int ordem_da_reserva = 1;
 
-
     // receive fligth code, array 
     
     public Plane(String flight_code, int[] executive_dim, int[] touristic_dim) {

@@ -1,4 +1,4 @@
-package lab03.voos;
+package lab04.T1.voos;
 
 public class Fila {
     private int[] lugares = null;
