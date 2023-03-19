@@ -6,6 +6,10 @@ public class Aviao {
     private ArrayList<Fila> filas = new ArrayList<>();
     private String code;
 
+    public String getCode() {
+        return code;
+    }
+
     private int numExec; // num of rows
     private int lenExec; // lenght of rows
     private int emptyExecSpaces;
