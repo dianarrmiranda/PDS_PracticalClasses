@@ -1,0 +1,11 @@
+The calendar class is an abstract class, which can be used in many contexts and programs, given that this class has an high level of abstration and adaptability.
+
+We found that this class have 2 proctected constructors, this means this constructors can't be acessed outside the Calendar class.
+1. protected Calendar() 
+2. protected Calendar(TimeZone zone, Locale aLocale)
+
+Both constructors of the Calendar class are protected and can only be accessed by classes in the same package or subclasses of the Calendar class.
+The first constructor creates a new instance of the Calendar class with the default time zone and locale, while the second constructor allows you to specify the time zone and locale for the new Calendar object.
+
+The getInstance() method of the Calendar class is a factory method that returns a Calendar object. This method is used to create new instances of the Calendar class without exposing the creation logic to the client.
+The getInstance() method also follows the Singleton pattern, as it ensures that only one instance of the Calendar class is created and reused.
