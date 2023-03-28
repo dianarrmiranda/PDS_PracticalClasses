@@ -1,6 +1,6 @@
 package lab06.Ex01;
 import static java.lang.System.*;
-public class Main01 {
+public class Main01 extends Database {
 
     public static void main(String[] args) {
 
@@ -53,6 +53,46 @@ public class Main01 {
         out.println(reg);
         
         out.println();
+
+        out.println("========================================== Com Adapter ==========================================");
+
+        Worker worker = new Worker("Luisa", "Silva", 1, 1000);
+        Worker worker2 = new Worker("Luís", "Santos", 2, 2000);
+        Worker worker3 = new Worker("José", "Pereira", 3, 3000);
+
+        SweetsAdapter sweetsAdapter = new SweetsAdapter();
+        sweetsAdapter.addWorker(worker);
+        sweetsAdapter.addWorker(worker2);
+        sweetsAdapter.addWorker(worker3);
+
+        out.println(sweetsAdapter.toString());
+
+        out.println();
+
+        PetiscosAdapter petiscosAdapter = new PetiscosAdapter();
+        petiscosAdapter.addWorker(worker);
+        petiscosAdapter.addWorker(worker2);
+        petiscosAdapter.addWorker(worker3);
+
+        out.println(petiscosAdapter.toString());
+
+        out.println();
+
+        out.println("Check if Luisa is in the Database:");
+        out.println(sweetsAdapter.isWorker(1));
+        out.println("Check if Luisa is in the Records:");
+        out.println(petiscosAdapter.isWorker(1));
+
+        out.println();
+
+        out.println("Remove Luisa from the Database:");
+        sweetsAdapter.removeWorker(1);
+
+        out.println(sweetsAdapter.toString());
+        out.println(petiscosAdapter.toString());
+
+
+
 
 
 
