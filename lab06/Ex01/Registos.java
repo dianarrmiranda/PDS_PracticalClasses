@@ -42,7 +42,4 @@ public class Registos {
         return empregados;
     }
 
-    public String toString() {
-        return "Registos: " + empregados;
-    }
 }

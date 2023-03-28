@@ -30,8 +30,5 @@ public class Empregado {
     public double salario() {
         return salario;
     }
-
-    public String toString() {
-        return " Empregado " + nome + " " +  apelido + " (" + codigo + ") Salário: " + salario;
-    }
+    
 }

@@ -56,41 +56,19 @@ public class Main01 extends Database {
 
         out.println("========================================== Com Adapter ==========================================");
 
-        Worker worker = new Worker("Luisa", "Silva", 1, 1000);
-        Worker worker2 = new Worker("Luís", "Santos", 2, 2000);
-        Worker worker3 = new Worker("José", "Pereira", 3, 3000);
+        Adapter adapter = new Adapter(db, reg);
+        
+        out.println(adapter);
 
-        SweetsAdapter sweetsAdapter = new SweetsAdapter();
-        sweetsAdapter.addWorker(worker);
-        sweetsAdapter.addWorker(worker2);
-        sweetsAdapter.addWorker(worker3);
 
-        out.println(sweetsAdapter.toString());
-
-        out.println();
-
-        PetiscosAdapter petiscosAdapter = new PetiscosAdapter();
-        petiscosAdapter.addWorker(worker);
-        petiscosAdapter.addWorker(worker2);
-        petiscosAdapter.addWorker(worker3);
-
-        out.println(petiscosAdapter.toString());
+        out.println("Removing employee 1 from the adapter");
+        adapter.removeEmployee(1);
+        out.println("Removing employee 123 from the adapter");
+        adapter.removeEmployee(123);
 
         out.println();
 
-        out.println("Check if Luisa is in the Database:");
-        out.println(sweetsAdapter.isWorker(1));
-        out.println("Check if Luisa is in the Records:");
-        out.println(petiscosAdapter.isWorker(1));
-
-        out.println();
-
-        out.println("Remove Luisa from the Database:");
-        sweetsAdapter.removeWorker(1);
-
-        out.println(sweetsAdapter.toString());
-        out.println(petiscosAdapter.toString());
-
+        out.println(adapter);
 
 
 

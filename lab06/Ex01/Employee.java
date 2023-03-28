@@ -25,8 +25,4 @@ public class Employee {
         return salary;
     }
 
-    public String toString() {
-        return " Employee " + name + " (" + emp_num + ") Salary: " + salary;
-    }
-
 }

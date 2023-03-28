@@ -12,8 +12,8 @@ public class Database {
 
     public boolean addEmployee(Employee employee) {
         // Code to add employee
-        employees.add(employee);
-        return true;
+        
+        return employees.add(employee);
     }
 
     public void deleteEmployee(long emp_num) {
@@ -35,7 +35,6 @@ public class Database {
         return employeesArray;
     }
 
-    public String toString() {
-        return "Database: " + employees;
-    }
+    
+
 }

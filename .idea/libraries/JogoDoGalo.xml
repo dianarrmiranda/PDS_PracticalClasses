@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JogoDoGalo">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lab03/JogoDoGalo/JogoDoGalo.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
