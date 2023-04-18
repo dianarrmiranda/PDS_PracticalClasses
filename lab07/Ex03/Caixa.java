@@ -1,52 +1,43 @@
 package lab07.Ex03;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Caixa extends Produto{
+public class Caixa implements ProdutoInterface{
 
-    private List<Produto> produtosLst = new ArrayList<>();
-    private double pesoTotal = 0;
-    protected static StringBuffer str = new StringBuffer();
+    private String nome;
+    private Double peso;
+    private ArrayList<ProdutoInterface> produtos;
+    static  int ident = 0;
 
-
-    public Caixa(String nome, double peso) {
-        super(nome, peso);
-    }
-    public void add(Produto p) {
-        this.produtosLst.add(p);
-        this.pesoTotal += p.getPeso();
+    Caixa(String nome, int peso) {
+        this.nome = nome;
+        this.peso = Double.valueOf(peso);
+        this.produtos = new ArrayList<ProdutoInterface>();
     }
 
-    public void draw(){
-        for (Produto produto : produtosLst) {
-            if( produto instanceof Caixa){
-                this.pesoTotal += produto.getPesoTotal();
+    void add(ProdutoInterface produto) {
+        this.produtos.add(produto);
+    }
+
+
+    public void draw() {
+        System.out.println("* Caixa '" + this.nome + "' [ Weight: " + this.peso + " ; Total: " + this.getPesoTotal() + "]");
+        ident++;
+        for (ProdutoInterface p : produtos) {
+            for (int i = 0; i < ident; i++) {
+                System.out.print("\t");
             }
+            p.draw();
         }
-        this.pesoTotal+=this.getPeso();
-
-        System.out.println(str.toString() + "* " + this.toString());
-        str.append("    ");
-        for (Produto produto : produtosLst) {
-
-            if (produto instanceof Caixa) {
-                produto.draw();
-            } else {
-                System.out.println(str.toString() + produto);
-            }
-        }
-        str.setLength(str.length() - 4);
-
-    }
-    @Override
-    public Double getPesoTotal(){
-        return this.pesoTotal;
+        ident--;   
     }
 
-    @Override
-    public String toString() {
-        return "* Caixa '" + getNome() + "' [Weight: " + getPeso() + "; Total: " + this.pesoTotal + "]";
+    public Double getPesoTotal() {
+        Double pesoTotal = this.peso;
+        for (ProdutoInterface p : produtos) {
+            pesoTotal += p.getPesoTotal();
+        }
+        return pesoTotal;
     }
 
 }
