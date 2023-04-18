@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f3ffb6f-a3a1-4236-ab27-78cfcd331f18" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiagramEx1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Empregado.java" beforeDir="false" afterPath="$PROJECT_DIR$/Empregado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main01.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main01.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetiscosAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registos.java" beforeDir="false" afterPath="$PROJECT_DIR$/Registos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SweetsAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../out/lab06/Ex01/diagrama/diagrama.png" beforeDir="false" />
-    </list>
+    <list default="true" id="0f3ffb6f-a3a1-4236-ab27-78cfcd331f18" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +20,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/diana/LEI/PDS/P/practical-g1_08/lab06/Ex02",
+    "last_opened_file_path": "/home/joao/Documents/Ano2/Semestre2/PDS-Padroes_Desenho_Software/practical-g1_08/lab07/Ex01",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -45,6 +33,7 @@
       <option name="presentableId" value="Default" />
       <updated>1680037113284</updated>
       <workItem from="1680037115214" duration="21000" />
+      <workItem from="1681776421225" duration="109000" />
     </task>
     <servers />
   </component>
