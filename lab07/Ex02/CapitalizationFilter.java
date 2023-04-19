@@ -1,38 +1,40 @@
 package lab07.Ex02;
 
-import java.util.Scanner;
-
 public class CapitalizationFilter extends FilterDecorator {
 
-    private Scanner sc;
+    private String word;
 
     public CapitalizationFilter(TextReaderInterface textReader) {
         super(textReader);
     }
 
     public boolean hasNext() {
-        if (sc != null && sc.hasNext())
-            return true;
-        return textReader.hasNext();
+        if (this.word == null || this.word.equals("")) {
+            if (textReader.hasNext()) {
+                this.word = textReader.next();
+            }
+        }
+        return !(this.word == null || this.word.equals(""));
     }
 
     @Override
     public String next() {
-        if (sc == null || sc != null && !sc.hasNext())
-            sc = new Scanner(textReader.next());
-        String text = sc.next();
-        String output = "";
-        if (hasNext()) {
-            if (text.length() > 2) {
-                output += text.substring(0, 1).toUpperCase() +
-                        text.substring(1, text.length() - 1).toLowerCase() +
-                        text.substring(text.length() - 1).toUpperCase() + " ";
-            } else {
-                output += text.toUpperCase() + " ";
+        String returnStr = "";
+        if (this.hasNext()) {
+
+            returnStr = this.word.substring(0, 1).toUpperCase() + this.word.substring(1);
+            
+            for (int i = returnStr.length() - 1; i >= 0; i--) {
+                if (Character.isLetter(returnStr.charAt(i))) {
+                    returnStr = returnStr.substring(0, i) + returnStr.substring(i, i + 1).toUpperCase() + returnStr.substring(i + 1);
+                    break;
+                }
             }
-            return output;
+
+            this.word = "";
         }
-        return null;
+
+        return returnStr;
     }
 
 }

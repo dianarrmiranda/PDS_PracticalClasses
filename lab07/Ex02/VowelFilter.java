@@ -1,10 +1,8 @@
 package lab07.Ex02;
 
-import java.util.Scanner;
-
 public class VowelFilter extends FilterDecorator {
 
-    private Scanner sc;
+    private String word;
 
     public VowelFilter(TextReaderInterface textReader) {
         super(textReader);
@@ -12,16 +10,23 @@ public class VowelFilter extends FilterDecorator {
 
     @Override
     public boolean hasNext() {
-        if (sc != null && sc.hasNext())
-            return true;
-        return textReader.hasNext();
+        if (word == null || word.equals("")) {
+            if (textReader.hasNext()) {
+                word = textReader.next();
+            }
+        }
+        return !(word == null || word.equals(""));
     }
 
     @Override
     public String next() {
-        if (sc == null || sc != null && !sc.hasNext())
-            sc = new Scanner(textReader.next());
-        return this.hasNext() ? sc.next().replaceAll("[AEIOUaeiou]", "") : null;
+        String returnStr = "";
+        if (this.hasNext()) {
+            returnStr = this.word.replaceAll("[aeiouAEIOU]", "");
+            this.word = "";
+        }
+        return returnStr;
     }
 
 }
+    
