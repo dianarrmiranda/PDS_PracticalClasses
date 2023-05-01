@@ -1,6 +1,6 @@
 package lab07.Ex02;
 
-abstract class FilterDecorator implements TextReaderInterface {
+public class FilterDecorator implements TextReaderInterface {
     
     protected TextReaderInterface textReader;
 
@@ -9,8 +9,14 @@ abstract class FilterDecorator implements TextReaderInterface {
     }
 
     @Override
-    public abstract boolean hasNext();
+    public boolean hasNext(){
+        textReader.hasNext();
+        return false;
+    }
 
     @Override
-    public abstract String next();
+    public String next(){
+        textReader.next();
+        return null;
+    }
 }

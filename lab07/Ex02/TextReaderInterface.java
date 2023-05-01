@@ -1,6 +1,6 @@
 package lab07.Ex02;
 
 public interface TextReaderInterface {
-    boolean hasNext();
-    String next();
+    public boolean hasNext();
+    public String next();
 }
