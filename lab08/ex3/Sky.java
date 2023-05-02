@@ -1,21 +1,21 @@
 import javax.swing.*;
 
-import startypes.StarType;
+
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Sky extends JFrame {
-    private List<StarType> stars = new ArrayList<>();
+    private List<StarFlyweight> stars = new ArrayList<>();
 
-    public void placeStar(StarType star) {
+    public void placeStar(StarFlyweight star) {
         stars.add(star);
     }
 
     @Override
     public void paint(Graphics graphics) {
-        for (StarType star : stars) {
+        for (StarFlyweight star : stars) {
             star.draw(graphics);
         }
     }

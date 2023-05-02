@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Random;
 
 import startypes.*;
 
@@ -10,15 +12,25 @@ public class Demo {
         Sky sky = new Sky();
 
         // https://astrobackyard.com/wp-content/uploads/2020/03/types-of-stars.jpg
-        char[] starTypes = {'O', 'B', 'A', 'F', 'G', 'K', 'M'};
-        char type;
+        HashMap <Character, StarType> starTypeMap = new HashMap<>();
+
+        starTypeMap.put('O', new OStar());
+        starTypeMap.put('B', new BStar());
+        starTypeMap.put('A', new AStar());
+        starTypeMap.put('F', new FStar());
+        starTypeMap.put('G', new GStar());
+        starTypeMap.put('K', new KStar());
+        starTypeMap.put('M', new MStar());
 
 		Runtime runtime = Runtime.getRuntime();
 		long before = runtime.totalMemory() - runtime.freeMemory();
+        Random random = new Random();
+        char type;
 
         for (int i = 0; i < STARS_TO_DRAW; i++) {
-            type = starTypes[random(0, starTypes.length-1)];
-            sky.placeStar(createStar(type));
+            type = (char) starTypeMap.keySet().toArray()[random.nextInt(starTypeMap.size())];
+            StarType s = starTypeMap.get(type);
+            sky.placeStar(createStar(s));
         }
         sky.setSize(CANVAS_SIZE, CANVAS_SIZE);
         sky.setBackground(Color.BLACK);
@@ -29,19 +41,12 @@ public class Demo {
 
     }
 
-    private static StarType createStar(char type) {
+    private static StarFlyweight createStar(StarType type) {
         int x = random(0, CANVAS_SIZE);
         int y = random(0, CANVAS_SIZE);
-        StarType star=null;
-        switch (type) {
-        case 'O' : star = new OStar(x, y); break;
-        case 'A' : star = new AStar(x, y); break;
-        case 'B' : star = new BStar(x, y); break;
-        case 'F' : star = new FStar(x, y); break;
-        case 'G' : star = new GStar(x, y); break;
-        case 'K' : star = new KStar(x, y); break;
-        case 'M' : star = new MStar(x, y); break;
-        }
+
+        StarFlyweight star = new StarFlyweight(type, x, y);
+        
         return star;
     }
 
