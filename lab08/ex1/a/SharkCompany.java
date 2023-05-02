@@ -1,8 +1,9 @@
+import java.util.List;
 public class SharkCompany {
 	public static void main(String[] args) {
 		
 		Company shark = new Company();
-		Company.user = User.OWNER;
+		Company.user = User.COMPANY;
 		shark.admitPerson("Maria Silva", 1000);
 		shark.admitPerson("Manuel Pereira", 900);
 		shark.admitPerson("Aurora Machado", 1200);

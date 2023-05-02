@@ -14,6 +14,6 @@ private BankAccount bankAccount;
 	}
 	
 	public BankAccount getBankAccount() {
-		return bankAccount;
+		return new BankAccountProxy(bankAccount);
 	}
 }
