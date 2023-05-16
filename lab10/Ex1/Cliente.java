@@ -33,7 +33,7 @@ public class Cliente extends Observer{
     public void licitar(Produto p, double preco) {
         if (produtosLeilao.contains(p)) {
             if (preco > p.getPreco()) {
-                System.out.println("Nova licitação:");
+                System.out.println("[" + this + "]" + " Nova licitação no valor de: "+ preco + " €");
                 p.setClienteAtual(this);
                 p.setPreco(preco);
             } else {
