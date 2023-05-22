@@ -1,0 +1,8 @@
+Na classe Java java.io.InputStream, o padrão Template Method é usado no método read() pois este método lê um byte de entrada, mas a sua implementação específica ocorre apenas nas sublasses. 
+Os métodos read(byte[]) e read(byte[], int, int) também usam este padrão, pois chamam repetidamente o método read(), acima descrito, preenchendo o array de bytes com os dados lidos.  No entanto, as subclasses substituam esse comportamento padrão, se necessário.
+
+Já na classe Java java.io.Writer, o padrão Template Method é usado no método write(char[]) pois este método escreve um array de caracteres, mas a implementação específica ocorre apenas nas sublasses.
+O método write(String, int, int) também usa este padrão, já que implementa a escrita de uma substring de uma string, convertendo-a depois num array de carateres e chamando o método write(char[], int, int). As suas subclasses podem substituir esse comportamento padrão.
+
+Por último a classe java.util.AbstractMap usa o padrão Template Method no método entrySet, pois utiliza o método 'AbstractSet', delegando a implementação do método 'iterator()' às subclasses.
+Também o método values(), que retorna uma coleção de valores do mapa, utilizando o método 'Abstract Collection', "empurra" a implementação do método 'iterator()' às subclasses.

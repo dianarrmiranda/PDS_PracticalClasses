@@ -1,0 +1,1 @@
+Para cumprir estes requisitos, pode ser usado o padrão Strategy, que permite resolver uma mesma tarefa de forma diferente, a partir de uma interface comum.
