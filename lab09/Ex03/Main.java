@@ -16,9 +16,8 @@ public class Main {
         control.execute("CD");
         control.execute("IHC");
         control.execute("POO");
-
-
         System.out.println(collection);
+        
         control.undo();
         System.out.println(collection);
 
@@ -27,8 +26,11 @@ public class Main {
         control.execute("PDS");
         control.undo();
         control.execute("IHC");
-
         control.undo();
+        System.out.println(collection);
+
+        control.execute("PDS");
+        control.execute("IHC");
         System.out.println(collection);
     }    
 }
