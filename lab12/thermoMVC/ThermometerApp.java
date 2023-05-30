@@ -1,4 +1,5 @@
-package mvc.thermoMVC;
+// Purpose: This class displays a mercury and digital thermometer.  The user can change
+package lab12.thermoMVC;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import mvc.thermoMVC.model.Thermometer;
-import mvc.thermoMVC.view.DigitalDisplay;
-import mvc.thermoMVC.view.MercuryDisplay;
+import lab12.thermoMVC.model.Thermometer;
+import lab12.thermoMVC.view.DigitalDisplay;
+import lab12.thermoMVC.view.MercuryDisplay;
+import lab12.thermoMVC.view.NewDisplay;
 
 /**
  * This class displays a mercury and digital thermometer.  The user can change 
@@ -57,14 +59,17 @@ public class ThermometerApp {
 		// Create the views
 		MercuryDisplay thermometerDisplay = new MercuryDisplay(-10, 120, thermometer);
 		DigitalDisplay thermometerDisplay2 = new DigitalDisplay(thermometer);
+		NewDisplay thermometerDisplay3 = new NewDisplay(thermometer);
 		
 		// Add the views to the display
 		mainPanel.add(thermometerDisplay);
 		mainPanel.add(thermometerDisplay2);
+		mainPanel.add(thermometerDisplay3);
 		
 		// Get the views to listen to the model
 		thermometer.addThermometerListener(thermometerDisplay);
 		thermometer.addThermometerListener(thermometerDisplay2);
+		thermometer.addThermometerListener(thermometerDisplay3);
 
 		// Display the frame
 		frame.pack();

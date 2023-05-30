@@ -1,4 +1,4 @@
-package mvc.thermoMVC.model;
+package lab12.thermoMVC.model;
 import java.util.ArrayList;
 
 

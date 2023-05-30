@@ -1,5 +1,4 @@
-package mvc.thermo;
-
+package lab12.thermo;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

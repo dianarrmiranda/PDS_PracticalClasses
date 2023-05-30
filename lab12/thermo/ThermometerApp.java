@@ -1,4 +1,4 @@
-package mvc.thermo;
+package lab12.thermo;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package mvc.thermoMVC.view;
+package lab12.thermoMVC.view;
 
 import java.awt.Color;
 
@@ -6,8 +6,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import mvc.thermoMVC.model.Thermometer;
-import mvc.thermoMVC.model.ThermometerListener;
+import lab12.thermoMVC.model.Thermometer;
+import lab12.thermoMVC.model.ThermometerListener;
 
 /**
  * A thermometer that displays as a digital thermometer.
